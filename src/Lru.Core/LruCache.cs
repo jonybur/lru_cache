@@ -5,17 +5,11 @@ namespace Lru.Core
 {
     public class LruCache<TKey, TValue> : ILruCache<TKey, TValue>
     {
-        private readonly Dictionary<TKey, LinkedListNode<KeyValuePair<TKey, TValue>>> _map;
-        private readonly LinkedList<KeyValuePair<TKey, TValue>> _lruList;
-        private readonly object _sync = new();
-
         public LruCache(int capacity)
         {
             if (capacity < 1)
                 throw new ArgumentOutOfRangeException(nameof(capacity), "Capacity must be > 0");
 
-            _map = new Dictionary<TKey, LinkedListNode<KeyValuePair<TKey, TValue>>>();
-            _lruList = new LinkedList<KeyValuePair<TKey, TValue>>();
             Capacity = capacity;
         }
 
